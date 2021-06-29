@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #e7f6ff;
@@ -20,6 +20,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 40px;
+  border-bottom: 1px solid #eaeaea;
 
 
   .header-left {
@@ -53,5 +54,13 @@ body {
   p {
     margin: 0;
     padding: 0;
+  }
+}
+
+.content {
+  padding: 40px;
+
+  h1 {
+    margin: 0;
   }
 }
