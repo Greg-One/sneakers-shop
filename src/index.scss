@@ -8,6 +8,7 @@ body {
 
 * {
   font-family: 'Inter', system-ui, sans-serif;
+  box-sizing: border-box;
 }
 
 .wrapper {
@@ -164,8 +165,38 @@ body {
   box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
   padding: 30px;
 
-  h2 {
-    margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+
+  .drawer-items {
+    flex: 1;
+    overflow: auto;
+    margin-bottom: 40px;
+  }
+
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0 0 20px;
+    }
+
+    button {
+      background: #ffffff;
+      border: 1px solid #f2f2f2;
+      box-sizing: border-box;
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.2s ease-in-out;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 
   .cart-item {
@@ -175,7 +206,7 @@ body {
     box-sizing: border-box;
     border-radius: 20px;
     overflow: hidden;
-    padding: 0 20px;
+    padding: 5px 10px;
     margin-bottom: 20px;
 
     .cart-info {
@@ -223,15 +254,17 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.drawer-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.drawer-block {
+  ul {
+    list-style-type: none;
+    margin: 0 0 40px;
+    padding: 0;
 
-  li {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 20px;
+    li {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
   }
 
   div {
@@ -241,5 +274,43 @@ body {
     position: relative;
     top: -4px;
     margin: 0 7px;
+  }
+
+  .button-green {
+    position: relative;
+
+    img {
+      position: absolute;
+      right: 30px;
+      top: 22px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover {
+      img {
+        transform: translateX(5px);
+      }
+    }
+  }
+}
+
+.button-green {
+  width: 100%;
+  height: 55px;
+  background: #9dd558;
+  border-radius: 18px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background: lighten($color: #9dd558, $amount: 5%);
+  }
+
+  &:active {
+    background: darken($color: #9dd558, $amount: 5%);
   }
 }
