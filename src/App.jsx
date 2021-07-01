@@ -2,6 +2,29 @@ import { Card } from './components/Card';
 import { Drawer } from './components/Drawer';
 import { Header } from './components/Header';
 
+const cardsArray = [
+  {
+    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
+    price: 12999,
+    image: '/img/sneakers/1.jpg',
+  },
+  {
+    title: 'Мужские Кроссовки Nike Air Max 270',
+    price: 12999,
+    image: '/img/sneakers/2.jpg',
+  },
+  {
+    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
+    price: 8499,
+    image: '/img/sneakers/3.jpg',
+  },
+  {
+    title: 'Кроссовки Puma X Aka Boku Future Rider',
+    price: 8499,
+    image: '/img/sneakers/4.jpg',
+  },
+];
+
 export function App() {
   return (
     <div className="wrapper">
@@ -18,7 +41,9 @@ export function App() {
           </div>
         </div>
         <div className="sneakers">
-          <Card />
+          {cardsArray.map((card) => (
+            <Card title={card.title} price={card.price} image={card.image} />
+          ))}
         </div>
       </div>
     </div>
