@@ -1,16 +1,17 @@
 import React from 'react';
+import styles from './Header.module.scss';
 
 export function Header() {
   return (
-    <header className="header">
-      <div className="header-left">
-        <img src="/img/logo.png" alt="logo" className="header-logo" />
+    <header className={styles.header}>
+      <div className={styles.headerLeft}>
+        <img src="/img/logo.png" alt="logo" className={styles.logo} />
         <div>
           <h3>React sneakers</h3>
           <p>Магазин лучших кроссовок</p>
         </div>
       </div>
-      <ul className="header-right">
+      <ul className={styles.headerRight}>
         <li>
           <img src="/img/cart-icon.svg" alt="Cart" />
           <span>1205 rub.</span>

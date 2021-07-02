@@ -1,24 +1,25 @@
 import React from 'react';
+import styles from './Drawer.module.scss';
 
 export function Drawer() {
   return (
-    <div className="drawer-overlay">
-      <div className="drawer">
-        <div className="drawer-header">
+    <div className={styles.overlay}>
+      <div className={styles.drawer}>
+        <div className={styles.header}>
           <h2>Корзина</h2>
           <button>
             <img src="/img/cart-remove.svg" alt="Remove" />
           </button>
         </div>
-        <div className="drawer-items">
-          <div className="cart-item">
+        <div className={styles.items}>
+          <div className={styles.item}>
             <img
               width={70}
               height={70}
               src="/img/sneakers/1.jpg"
               alt="Sneakers"
             />
-            <div className="cart-info">
+            <div className={styles.info}>
               <p>Мужские Кроссовки Nike Air Max 270</p>
               <b>12 999 руб.</b>
             </div>
@@ -27,14 +28,14 @@ export function Drawer() {
             </button>
           </div>
 
-          <div className="cart-item">
+          <div className={styles.item}>
             <img
               width={70}
               height={70}
               src="/img/sneakers/1.jpg"
               alt="Sneakers"
             />
-            <div className="cart-info">
+            <div className={styles.info}>
               <p>Мужские Кроссовки Nike Air Max 270</p>
               <b>12 999 руб.</b>
             </div>
@@ -43,14 +44,14 @@ export function Drawer() {
             </button>
           </div>
 
-          <div className="cart-item">
+          <div className={styles.item}>
             <img
               width={70}
               height={70}
               src="/img/sneakers/1.jpg"
               alt="Sneakers"
             />
-            <div className="cart-info">
+            <div className={styles.info}>
               <p>Мужские Кроссовки Nike Air Max 270</p>
               <b>12 999 руб.</b>
             </div>
@@ -59,7 +60,7 @@ export function Drawer() {
             </button>
           </div>
         </div>
-        <div className="drawer-block">
+        <div className={styles.block}>
           <ul>
             <li>
               <span>Итого:</span>
@@ -72,7 +73,7 @@ export function Drawer() {
               <b>1074 руб.</b>
             </li>
           </ul>
-          <button className="button-green">
+          <button className={styles.buttonGreen}>
             Оформить заказ <img src="/img/cart-arrow.svg" alt="Arrow" />
           </button>
         </div>

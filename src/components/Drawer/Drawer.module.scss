@@ -1,0 +1,160 @@
+.drawer {
+  position: absolute;
+  width: 385px;
+  height: 100%;
+  right: 0;
+
+  background: #ffffff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  .items {
+    flex: 1;
+    overflow: auto;
+    margin-bottom: 40px;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0 0 20px;
+    }
+
+    button {
+      background: #ffffff;
+      border: 1px solid #f2f2f2;
+      box-sizing: border-box;
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.2s ease-in-out;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #f3f3f3;
+    box-sizing: border-box;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+
+    .info {
+      margin-right: 20px;
+    }
+
+    img {
+      margin-right: 20px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    b {
+      font-size: 14px;
+    }
+
+    button {
+      background: #ffffff;
+      border: 1px solid #f2f2f2;
+      box-sizing: border-box;
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.2s ease-in-out;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.block {
+  ul {
+    list-style-type: none;
+    margin: 0 0 40px;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
+  }
+
+  div {
+    flex: 1;
+    height: 1px;
+    border-bottom: 1px dashed #dfdfdf;
+    position: relative;
+    top: -4px;
+    margin: 0 7px;
+  }
+
+  .buttonGreen {
+    position: relative;
+
+    img {
+      position: absolute;
+      right: 30px;
+      top: 22px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover {
+      img {
+        transform: translateX(5px);
+      }
+    }
+  }
+}
+
+.buttonGreen {
+  width: 100%;
+  height: 55px;
+  background: #9dd558;
+  border-radius: 18px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background: lighten($color: #9dd558, $amount: 5%);
+  }
+
+  &:active {
+    background: darken($color: #9dd558, $amount: 5%);
+  }
+}
