@@ -13,11 +13,15 @@ export function Header() {
       </div>
       <ul className={styles.headerRight}>
         <li>
-          <img src="/img/cart-icon.svg" alt="Cart" />
+          <button>
+            <img src="/img/cart-icon.svg" alt="Cart" />
+          </button>
           <span>1205 rub.</span>
         </li>
         <li>
-          <img src="/img/user-icon.svg" alt="Profile" />
+          <button>
+            <img src="/img/user-icon.svg" alt="Profile" />
+          </button>
         </li>
       </ul>
     </header>
