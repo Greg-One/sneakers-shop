@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Header.module.scss';
 
-export function Header() {
+export function Header(props) {
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
@@ -13,10 +13,10 @@ export function Header() {
       </div>
       <ul className={styles.headerRight}>
         <li>
-          <button>
+          <button onClick={props.onClickCart}>
             <img src="/img/cart-icon.svg" alt="Cart" />
+            <span>1205 rub.</span>
           </button>
-          <span>1205 rub.</span>
         </li>
         <li>
           <button>

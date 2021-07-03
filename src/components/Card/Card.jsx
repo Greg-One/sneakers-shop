@@ -21,10 +21,7 @@ export function Card(props) {
           <span>Цена:</span>
           <b>{props.price} руб.</b>
         </div>
-        <button
-          onClick={handlePlusClick}
-          className={isAdded ? styles.plus : ''}
-        >
+        <button onClick={handlePlusClick} className={isAdded && styles.plus}>
           <img
             src={isAdded ? '/img/plus-checked.svg' : '/img/plus.svg'}
             alt="Add item"

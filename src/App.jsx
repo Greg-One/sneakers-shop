@@ -1,3 +1,4 @@
+import React from 'react';
 import { Header } from './components/Header';
 import { Card } from './components/Card';
 import { Drawer } from './components/Drawer';
@@ -26,10 +27,11 @@ const cardsArray = [
 ];
 
 export function App() {
+  const [cartOpened, setCartOpened] = React.useState(false);
   return (
     <div className="wrapper">
-      <Header />
-      <Drawer />
+      <Header onClickCart={() => setCartOpened(true)} />
+      {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
 
       <div className="content">
         <div className="title">

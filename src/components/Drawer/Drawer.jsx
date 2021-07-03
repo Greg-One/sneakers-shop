@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './Drawer.module.scss';
 
-export function Drawer() {
+export function Drawer(props) {
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
         <div className={styles.header}>
           <h2>Корзина</h2>
-          <button>
+          <button onClick={props.onClose}>
             <img src="/img/cart-remove.svg" alt="Remove" />
           </button>
         </div>
