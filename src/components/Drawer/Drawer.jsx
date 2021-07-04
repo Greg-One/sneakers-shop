@@ -12,9 +12,9 @@ export function Drawer({ items = [], onClose }) {
           </button>
         </div>
         <div className={styles.items}>
-          {items.map((item) => {
+          {items.map((item, index) => {
             return (
-              <div className={styles.item}>
+              <div className={styles.item} key={index}>
                 <img width={70} height={70} src={item.image} alt="Sneakers" />
                 <div className={styles.info}>
                   <p>{item.title}</p>

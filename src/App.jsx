@@ -36,12 +36,13 @@ export function App() {
           </div>
         </div>
         <div className="sneakers">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <Card
               title={item.title}
               price={item.price}
               image={item.image}
               onClickAdd={() => onCartAdd(item)}
+              key={index}
             />
           ))}
         </div>
