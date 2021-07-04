@@ -5,6 +5,7 @@ import { Drawer } from './components/Drawer';
 
 export function App() {
   const [items, setItems] = React.useState([]);
+  const [cartItems, setCartItems] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState(false);
 
   React.useEffect(() => {
@@ -14,11 +15,16 @@ export function App() {
       })
       .then((json) => setItems(json));
   }, []);
+  //? try to add api class later
+
+  const onCartAdd = (item) => setCartItems((prev) => [...prev, item]);
 
   return (
     <div className="wrapper">
       <Header onClickCart={() => setCartOpened(true)} />
-      {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
+      {cartOpened && (
+        <Drawer items={cartItems} onClose={() => setCartOpened(false)} />
+      )}
 
       <div className="content">
         <div className="title">
@@ -30,8 +36,13 @@ export function App() {
           </div>
         </div>
         <div className="sneakers">
-          {items.map((card) => (
-            <Card title={card.title} price={card.price} image={card.image} />
+          {items.map((item) => (
+            <Card
+              title={item.title}
+              price={item.price}
+              image={item.image}
+              onClickAdd={() => onCartAdd(item)}
+            />
           ))}
         </div>
       </div>

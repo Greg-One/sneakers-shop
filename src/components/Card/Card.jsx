@@ -1,25 +1,26 @@
 import React from 'react';
 import styles from './Card.module.scss';
 
-export function Card(props) {
+export function Card({ title, image, price, onClickLike, onClickAdd }) {
   const [isAdded, setIsAdded] = React.useState(false);
 
   const handlePlusClick = () => {
+    onClickAdd({ title, image, price });
     setIsAdded(!isAdded);
   };
 
   return (
     <article className={styles.card}>
-      <button className={styles.like} onClick={props.onClickLike}>
+      <button className={styles.like} onClick={onClickLike}>
         <img src="/img/like-disabled.svg" alt="Like" />
       </button>
 
-      <img width={133} height={112} src={props.image} alt="sneakers" />
-      <h5>{props.title}</h5>
+      <img width={133} height={112} src={image} alt="sneakers" />
+      <h5>{title}</h5>
       <div className={styles.content}>
         <div className={styles.price}>
           <span>Цена:</span>
-          <b>{props.price} руб.</b>
+          <b>{price} руб.</b>
         </div>
         <button
           onClick={handlePlusClick}
