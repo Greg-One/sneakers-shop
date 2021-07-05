@@ -8,7 +8,7 @@ export function Drawer({ items = [], onClose }) {
         <div className={styles.header}>
           <h2>Корзина</h2>
           <button onClick={onClose}>
-            <img src="/img/cart-remove.svg" alt="Remove" />
+            <img src="/img/remove.svg" alt="Remove" />
           </button>
         </div>
         <div className={styles.items}>
@@ -21,7 +21,7 @@ export function Drawer({ items = [], onClose }) {
                   <b>{item.price} руб.</b>
                 </div>
                 <button>
-                  <img src="/img/cart-remove.svg" alt="Remove" />
+                  <img src="/img/remove.svg" alt="Remove" />
                 </button>
               </div>
             );
