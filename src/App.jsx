@@ -14,10 +14,21 @@ export function App() {
     axios
       .get('https://60e0cfc96b689e001788cbeb.mockapi.io/items')
       .then((res) => setItems(res.data));
+    axios
+      .get('https://60e0cfc96b689e001788cbeb.mockapi.io/cart')
+      .then((res) => setCartItems(res.data));
   }, []);
   //? try to add api class later
 
-  const onCartAdd = (item) => setCartItems((prev) => [...prev, item]);
+  const handleCartAdd = (item) => {
+    axios.post('https://60e0cfc96b689e001788cbeb.mockapi.io/cart', item);
+    setCartItems((prev) => [...prev, item]);
+  };
+
+  const handleCartRemove = (id) => {
+    axios.delete(`https://60e0cfc96b689e001788cbeb.mockapi.io/cart/${id}`);
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
 
   const handleSearchInputChange = (event) => {
     setSearchValue(event.target.value);
@@ -27,7 +38,11 @@ export function App() {
     <div className="wrapper">
       <Header onClickCart={() => setCartOpened(true)} />
       {cartOpened && (
-        <Drawer items={cartItems} onClose={() => setCartOpened(false)} />
+        <Drawer
+          items={cartItems}
+          onClose={() => setCartOpened(false)}
+          onCartRemove={handleCartRemove}
+        />
       )}
 
       <div className="content">
@@ -63,7 +78,7 @@ export function App() {
                 title={item.title}
                 price={item.price}
                 image={item.image}
-                onClickAdd={() => onCartAdd(item)}
+                onClickAdd={() => handleCartAdd(item)}
                 key={index}
               />
             ))}

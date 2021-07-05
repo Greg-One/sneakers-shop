@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Drawer.module.scss';
 
-export function Drawer({ items = [], onClose }) {
+export function Drawer({ items = [], onClose, onCartRemove }) {
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
@@ -20,7 +20,7 @@ export function Drawer({ items = [], onClose }) {
                   <p>{item.title}</p>
                   <b>{item.price} руб.</b>
                 </div>
-                <button>
+                <button onClick={() => onCartRemove(item.id)}>
                   <img src="/img/remove.svg" alt="Remove" />
                 </button>
               </div>
