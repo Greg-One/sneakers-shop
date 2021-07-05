@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Header } from './components/Header';
 import { Card } from './components/Card';
 import { Drawer } from './components/Drawer';
@@ -10,11 +11,9 @@ export function App() {
   const [searchValue, setSearchValue] = React.useState('');
 
   React.useEffect(() => {
-    fetch('https://60e0cfc96b689e001788cbeb.mockapi.io/items')
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => setItems(json));
+    axios
+      .get('https://60e0cfc96b689e001788cbeb.mockapi.io/items')
+      .then((res) => setItems(res.data));
   }, []);
   //? try to add api class later
 
