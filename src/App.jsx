@@ -9,6 +9,7 @@ export function App() {
   const [cartItems, setCartItems] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
+  const [likes, setLikes] = React.useState([]);
 
   React.useEffect(() => {
     axios
@@ -28,6 +29,11 @@ export function App() {
   const handleCartRemove = (id) => {
     axios.delete(`https://60e0cfc96b689e001788cbeb.mockapi.io/cart/${id}`);
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleCardLike = (item) => {
+    axios.post('https://60e0cfc96b689e001788cbeb.mockapi.io/likes', item);
+    setLikes((prev) => [...prev, item]);
   };
 
   const handleSearchInputChange = (event) => {
@@ -78,7 +84,8 @@ export function App() {
                 title={item.title}
                 price={item.price}
                 image={item.image}
-                onClickAdd={() => handleCartAdd(item)}
+                onClickAdd={(item) => handleCartAdd(item)}
+                onClickLike={(item) => handleCardLike(item)}
                 key={index}
               />
             ))}

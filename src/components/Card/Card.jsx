@@ -11,6 +11,7 @@ export function Card({ title, image, price, onClickLike, onClickAdd }) {
   };
 
   const handleLikeClick = () => {
+    onClickLike({ title, image, price });
     setIsLiked(!isLiked);
   };
 
