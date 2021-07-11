@@ -37,16 +37,20 @@ export function App() {
   };
 
   const handleCardLike = async (obj) => {
-    if (favorities.find((item) => item.id === obj.id)) {
-      axios.delete(
-        `https://60e0cfc96b689e001788cbeb.mockapi.io/favorities/${obj.id}`,
-      );
-    } else {
-      const { data } = await axios.post(
-        'https://60e0cfc96b689e001788cbeb.mockapi.io/favorities',
-        obj,
-      );
-      setFavorities((prev) => [...prev, data]);
+    try {
+      if (favorities.find((item) => item.id === obj.id)) {
+        axios.delete(
+          `https://60e0cfc96b689e001788cbeb.mockapi.io/favorities/${obj.id}`,
+        );
+      } else {
+        const { data } = await axios.post(
+          'https://60e0cfc96b689e001788cbeb.mockapi.io/favorities',
+          obj,
+        );
+        setFavorities((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
