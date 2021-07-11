@@ -50,7 +50,7 @@ export function Drawer({ items = [], onClose, onCartRemove }) {
                 </li>
               </ul>
               <button className={styles.buttonGreen}>
-                Оформить заказ{' '}
+                Оформить заказ
                 <img src="/img/cart-forward-arrow.svg" alt="Arrow" />
               </button>
             </div>

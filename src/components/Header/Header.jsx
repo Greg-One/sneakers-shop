@@ -20,6 +20,11 @@ export function Header(props) {
         </li>
         <li>
           <button>
+            <img src="/img/favorities.svg" alt="Favorities" />
+          </button>
+        </li>
+        <li>
+          <button>
             <img src="/img/user-icon.svg" alt="Profile" />
           </button>
         </li>
