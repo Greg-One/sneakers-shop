@@ -3,16 +3,24 @@ import styles from './Card.module.scss';
 
 export function Card({ title, image, price, onClickLike, onClickAdd }) {
   const [isAdded, setIsAdded] = React.useState(false);
+  const [isLiked, setIsLiked] = React.useState(false);
 
   const handlePlusClick = () => {
     onClickAdd({ title, image, price });
     setIsAdded(!isAdded);
   };
 
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
     <article className={styles.card}>
-      <button className={styles.like} onClick={onClickLike}>
-        <img src="/img/like-disabled.svg" alt="Like" />
+      <button className={styles.like} onClick={handleLikeClick}>
+        <img
+          src={isLiked ? '/img/like-enabled.svg' : '/img/like-disabled.svg'}
+          alt="Like"
+        />
       </button>
 
       <img width={133} height={112} src={image} alt="sneakers" />
