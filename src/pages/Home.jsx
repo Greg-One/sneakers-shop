@@ -38,12 +38,10 @@ export function Home({
           )
           .map((item, index) => (
             <Card
-              title={item.title}
-              price={item.price}
-              image={item.image}
               onClickAdd={(item) => handleCartAdd(item)}
               onClickLike={(item) => handleCardLike(item)}
               key={index}
+              {...item}
             />
           ))}
       </div>

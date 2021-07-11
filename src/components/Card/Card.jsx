@@ -1,9 +1,17 @@
 import React from 'react';
 import styles from './Card.module.scss';
 
-export function Card({ title, image, price, onClickLike, onClickAdd }) {
+export function Card({
+  id,
+  title,
+  image,
+  price,
+  onClickLike,
+  onClickAdd,
+  liked = false,
+}) {
   const [isAdded, setIsAdded] = React.useState(false);
-  const [isLiked, setIsLiked] = React.useState(false);
+  const [isLiked, setIsLiked] = React.useState(liked);
 
   const handlePlusClick = () => {
     onClickAdd({ title, image, price });
@@ -11,7 +19,7 @@ export function Card({ title, image, price, onClickLike, onClickAdd }) {
   };
 
   const handleLikeClick = () => {
-    onClickLike({ title, image, price });
+    onClickLike({ id, title, image, price });
     setIsLiked(!isLiked);
   };
 

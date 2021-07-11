@@ -1,15 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 import { Header } from './components/Header';
-import { Card } from './components/Card';
 import { Drawer } from './components/Drawer';
+import { Route } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { Favorities } from './pages/Favorities';
 
 export function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
-  const [likes, setLikes] = React.useState([]);
+  const [favorities, setFavorities] = React.useState([]);
 
   React.useEffect(() => {
     axios
@@ -18,6 +20,9 @@ export function App() {
     axios
       .get('https://60e0cfc96b689e001788cbeb.mockapi.io/cart')
       .then((res) => setCartItems(res.data));
+    axios
+      .get('https://60e0cfc96b689e001788cbeb.mockapi.io/favorities')
+      .then((res) => setFavorities(res.data));
   }, []);
   //? try to add api class later
 
@@ -31,9 +36,18 @@ export function App() {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const handleCardLike = (item) => {
-    axios.post('https://60e0cfc96b689e001788cbeb.mockapi.io/likes', item);
-    setLikes((prev) => [...prev, item]);
+  const handleCardLike = async (obj) => {
+    if (favorities.find((item) => item.id === obj.id)) {
+      axios.delete(
+        `https://60e0cfc96b689e001788cbeb.mockapi.io/favorities/${obj.id}`,
+      );
+    } else {
+      const { data } = await axios.post(
+        'https://60e0cfc96b689e001788cbeb.mockapi.io/favorities',
+        obj,
+      );
+      setFavorities((prev) => [...prev, data]);
+    }
   };
 
   const handleSearchInputChange = (event) => {
@@ -51,46 +65,19 @@ export function App() {
         />
       )}
 
-      <div className="content">
-        <div className="title">
-          <h1>
-            {searchValue
-              ? `Поиск по запросу: "${searchValue}"`
-              : 'Все кроссовки'}
-          </h1>
-          <div className="search">
-            <img src="/img/search.svg" alt="Search" />
-
-            <input
-              onChange={handleSearchInputChange}
-              value={searchValue}
-              type="text"
-              placeholder="Поиск..."
-            />
-            {searchValue && (
-              <button onClick={() => setSearchValue('')}>
-                <img src="/img/remove.svg" alt="Clear text" />
-              </button>
-            )}
-          </div>
-        </div>
-        <div className="sneakers">
-          {items
-            .filter((item) =>
-              item.title.toLowerCase().includes(searchValue.toLowerCase()),
-            )
-            .map((item, index) => (
-              <Card
-                title={item.title}
-                price={item.price}
-                image={item.image}
-                onClickAdd={(item) => handleCartAdd(item)}
-                onClickLike={(item) => handleCardLike(item)}
-                key={index}
-              />
-            ))}
-        </div>
-      </div>
+      <Route exact path="/">
+        <Home
+          items={items}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          handleSearchInputChange={handleSearchInputChange}
+          handleCartAdd={handleCartAdd}
+          handleCardLike={handleCardLike}
+        />
+      </Route>
+      <Route exact path="/favorities">
+        <Favorities items={favorities} handleCardLike={handleCardLike} />
+      </Route>
     </div>
   );
 }
