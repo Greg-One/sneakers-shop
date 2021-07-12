@@ -14,21 +14,45 @@ export function App() {
   const [favorities, setFavorities] = React.useState([]);
 
   React.useEffect(() => {
-    axios
-      .get('https://60e0cfc96b689e001788cbeb.mockapi.io/items')
-      .then((res) => setItems(res.data));
-    axios
-      .get('https://60e0cfc96b689e001788cbeb.mockapi.io/cart')
-      .then((res) => setCartItems(res.data));
-    axios
-      .get('https://60e0cfc96b689e001788cbeb.mockapi.io/favorities')
-      .then((res) => setFavorities(res.data));
+    async function fetchData() {
+      const cartResponse = await axios.get(
+        'https://60e0cfc96b689e001788cbeb.mockapi.io/cart',
+      );
+      const favoritiesResponse = await axios.get(
+        'https://60e0cfc96b689e001788cbeb.mockapi.io/favorities',
+      );
+      const itemsResponse = await axios.get(
+        'https://60e0cfc96b689e001788cbeb.mockapi.io/items',
+      );
+
+      setCartItems(cartResponse.data);
+      setFavorities(favoritiesResponse.data);
+      setItems(itemsResponse.data);
+    }
+    fetchData();
   }, []);
   //? try to add api class later
 
-  const handleCartAdd = (item) => {
-    axios.post('https://60e0cfc96b689e001788cbeb.mockapi.io/cart', item);
-    setCartItems((prev) => [...prev, item]);
+  const handleCartAdd = async (obj) => {
+    console.log(obj);
+    try {
+      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+        axios.delete(
+          `https://60e0cfc96b689e001788cbeb.mockapi.io/cart/${obj.id}`,
+        );
+        setCartItems((prev) =>
+          prev.filter((item) => Number(item.id) !== Number(obj.id)),
+        );
+      } else {
+        const { data } = await axios.post(
+          'https://60e0cfc96b689e001788cbeb.mockapi.io/cart',
+          obj,
+        );
+        setCartItems((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleCartRemove = (id) => {
@@ -72,6 +96,7 @@ export function App() {
       <Route exact path="/">
         <Home
           items={items}
+          cartItems={cartItems}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
           handleSearchInputChange={handleSearchInputChange}

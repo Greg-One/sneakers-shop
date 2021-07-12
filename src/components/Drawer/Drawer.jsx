@@ -15,9 +15,9 @@ export function Drawer({ items = [], onClose, onCartRemove }) {
         {items.length > 0 ? (
           <>
             <div className={styles.items}>
-              {items.map((item, index) => {
+              {items.map((item) => {
                 return (
-                  <div className={styles.item} key={index}>
+                  <div className={styles.item} key={item.id}>
                     <img
                       width={70}
                       height={70}

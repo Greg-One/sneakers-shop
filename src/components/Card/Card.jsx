@@ -9,12 +9,13 @@ export function Card({
   onClickLike,
   onClickAdd,
   liked = false,
+  added = false,
 }) {
-  const [isAdded, setIsAdded] = React.useState(false);
+  const [isAdded, setIsAdded] = React.useState(added);
   const [isLiked, setIsLiked] = React.useState(liked);
 
   const handlePlusClick = () => {
-    onClickAdd({ title, image, price });
+    onClickAdd({ id, title, image, price });
     setIsAdded(!isAdded);
   };
 

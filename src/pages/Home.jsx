@@ -3,6 +3,7 @@ import { Card } from '../components/Card';
 
 export function Home({
   items,
+  cartItems,
   searchValue,
   setSearchValue,
   handleSearchInputChange,
@@ -38,9 +39,12 @@ export function Home({
           )
           .map((item, index) => (
             <Card
-              onClickAdd={(item) => handleCartAdd(item)}
-              onClickLike={(item) => handleCardLike(item)}
+              onClickAdd={(obj) => handleCartAdd(obj)}
+              onClickLike={(obj) => handleCardLike(obj)}
               key={index}
+              added={cartItems.some(
+                (obj) => Number(obj.id) === Number(item.id),
+              )}
               {...item}
             />
           ))}
