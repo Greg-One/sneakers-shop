@@ -9,7 +9,24 @@ export function Home({
   handleSearchInputChange,
   handleCartAdd,
   handleCardLike,
+  isLoading,
 }) {
+  const renderItems = () => {
+    const filteredItems = items.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
+    return (isLoading ? [...Array(8)] : filteredItems).map((item, index) => (
+      <Card
+        onClickAdd={(obj) => handleCartAdd(obj)}
+        onClickLike={(obj) => handleCardLike(obj)}
+        key={index}
+        added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
+        loading={isLoading}
+        {...item}
+      />
+    ));
+  };
+
   return (
     <div className="content">
       <div className="title">
@@ -32,23 +49,7 @@ export function Home({
           )}
         </div>
       </div>
-      <div className="sneakers">
-        {items
-          .filter((item) =>
-            item.title.toLowerCase().includes(searchValue.toLowerCase()),
-          )
-          .map((item, index) => (
-            <Card
-              onClickAdd={(obj) => handleCartAdd(obj)}
-              onClickLike={(obj) => handleCardLike(obj)}
-              key={index}
-              added={cartItems.some(
-                (obj) => Number(obj.id) === Number(item.id),
-              )}
-              {...item}
-            />
-          ))}
-      </div>
+      <div className="sneakers">{renderItems()}</div>
     </div>
   );
 }

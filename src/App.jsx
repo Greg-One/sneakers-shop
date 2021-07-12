@@ -12,9 +12,11 @@ export function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
   const [favorities, setFavorities] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
     async function fetchData() {
+      setIsLoading(true);
       const cartResponse = await axios.get(
         'https://60e0cfc96b689e001788cbeb.mockapi.io/cart',
       );
@@ -25,6 +27,8 @@ export function App() {
         'https://60e0cfc96b689e001788cbeb.mockapi.io/items',
       );
 
+      setIsLoading(false);
+
       setCartItems(cartResponse.data);
       setFavorities(favoritiesResponse.data);
       setItems(itemsResponse.data);
@@ -34,7 +38,6 @@ export function App() {
   //? try to add api class later
 
   const handleCartAdd = async (obj) => {
-    console.log(obj);
     try {
       if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
         axios.delete(
@@ -102,6 +105,7 @@ export function App() {
           handleSearchInputChange={handleSearchInputChange}
           handleCartAdd={handleCartAdd}
           handleCardLike={handleCardLike}
+          isLoading={isLoading}
         />
       </Route>
       <Route exact path="/favorities">
