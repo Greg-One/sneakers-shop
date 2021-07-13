@@ -92,7 +92,15 @@ export function App() {
 
   return (
     <AppContext.Provider
-      value={{ items, cartItems, favorities, getAddedItems, handleCardLike }}
+      value={{
+        items,
+        cartItems,
+        favorities,
+        getAddedItems,
+        handleCardLike,
+        setCartOpened,
+        setCartItems,
+      }}
     >
       <div className="wrapper">
         <Header onClickCart={() => setCartOpened(true)} />
