@@ -3,7 +3,6 @@ import { Card } from '../components/Card';
 
 export function Home({
   items,
-  cartItems,
   searchValue,
   setSearchValue,
   handleSearchInputChange,
@@ -20,7 +19,6 @@ export function Home({
         onClickAdd={(obj) => handleCartAdd(obj)}
         onClickLike={(obj) => handleCardLike(obj)}
         key={index}
-        added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
         loading={isLoading}
         {...item}
       />

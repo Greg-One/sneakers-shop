@@ -5,6 +5,7 @@ import { Drawer } from './components/Drawer';
 import { Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Favorities } from './pages/Favorities';
+import { AppContext } from './context';
 
 export function App() {
   const [items, setItems] = React.useState([]);
@@ -47,11 +48,8 @@ export function App() {
           prev.filter((item) => Number(item.id) !== Number(obj.id)),
         );
       } else {
-        const { data } = await axios.post(
-          'https://60e0cfc96b689e001788cbeb.mockapi.io/cart',
-          obj,
-        );
-        setCartItems((prev) => [...prev, data]);
+        axios.post('https://60e0cfc96b689e001788cbeb.mockapi.io/cart', obj);
+        setCartItems((prev) => [...prev, obj]);
       }
     } catch (error) {
       console.log(error);
@@ -85,32 +83,40 @@ export function App() {
     setSearchValue(event.target.value);
   };
 
-  return (
-    <div className="wrapper">
-      <Header onClickCart={() => setCartOpened(true)} />
-      {cartOpened && (
-        <Drawer
-          items={cartItems}
-          onClose={() => setCartOpened(false)}
-          onCartRemove={handleCartRemove}
-        />
-      )}
+  const getAddedItems = (id) => {
+    return cartItems.some((obj) => Number(obj.id) === Number(id));
+  };
 
-      <Route exact path="/">
-        <Home
-          items={items}
-          cartItems={cartItems}
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-          handleSearchInputChange={handleSearchInputChange}
-          handleCartAdd={handleCartAdd}
-          handleCardLike={handleCardLike}
-          isLoading={isLoading}
-        />
-      </Route>
-      <Route exact path="/favorities">
-        <Favorities items={favorities} handleCardLike={handleCardLike} />
-      </Route>
-    </div>
+  return (
+    <AppContext.Provider
+      value={{ items, cartItems, favorities, getAddedItems }}
+    >
+      <div className="wrapper">
+        <Header onClickCart={() => setCartOpened(true)} />
+        {cartOpened && (
+          <Drawer
+            items={cartItems}
+            onClose={() => setCartOpened(false)}
+            onCartRemove={handleCartRemove}
+          />
+        )}
+
+        <Route exact path="/">
+          <Home
+            items={items}
+            cartItems={cartItems}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            handleSearchInputChange={handleSearchInputChange}
+            handleCartAdd={handleCartAdd}
+            handleCardLike={handleCardLike}
+            isLoading={isLoading}
+          />
+        </Route>
+        <Route exact path="/favorities">
+          <Favorities handleCardLike={handleCardLike} />
+        </Route>
+      </div>
+    </AppContext.Provider>
   );
 }

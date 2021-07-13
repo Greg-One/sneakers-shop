@@ -1,5 +1,6 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
+import { AppContext } from '../../context';
 import styles from './Card.module.scss';
 
 export function Card({
@@ -13,12 +14,12 @@ export function Card({
   added = false,
   loading = false,
 }) {
-  const [isAdded, setIsAdded] = React.useState(added);
+  const { getAddedItems } = React.useContext(AppContext);
+
   const [isLiked, setIsLiked] = React.useState(liked);
 
   const handlePlusClick = () => {
     onClickAdd({ id, title, image, price });
-    setIsAdded(!isAdded);
   };
 
   const handleLikeClick = () => {
@@ -61,10 +62,12 @@ export function Card({
             </div>
             <button
               onClick={handlePlusClick}
-              className={isAdded ? styles.plus : ''}
+              className={getAddedItems(id) ? styles.plus : ''}
             >
               <img
-                src={isAdded ? '/img/plus-checked.svg' : '/img/plus.svg'}
+                src={
+                  getAddedItems(id) ? '/img/plus-checked.svg' : '/img/plus.svg'
+                }
                 alt="Add item"
               />
             </button>
