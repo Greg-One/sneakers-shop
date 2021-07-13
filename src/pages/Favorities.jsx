@@ -2,8 +2,8 @@ import React from 'react';
 import { AppContext } from '../context';
 import { Card } from '../components/Card';
 
-export function Favorities({ handleCardLike }) {
-  const { favorities } = React.useContext(AppContext);
+export function Favorities() {
+  const { favorities, handleCardLike } = React.useContext(AppContext);
 
   return (
     <div className="content">

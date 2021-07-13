@@ -63,9 +63,12 @@ export function App() {
 
   const handleCardLike = async (obj) => {
     try {
-      if (favorities.find((item) => item.id === obj.id)) {
+      if (favorities.find((item) => Number(item.id) === Number(obj.id))) {
         axios.delete(
           `https://60e0cfc96b689e001788cbeb.mockapi.io/favorities/${obj.id}`,
+        );
+        setFavorities((prev) =>
+          prev.filter((item) => Number(item.id) !== Number(obj.id)),
         );
       } else {
         const { data } = await axios.post(
@@ -89,7 +92,7 @@ export function App() {
 
   return (
     <AppContext.Provider
-      value={{ items, cartItems, favorities, getAddedItems }}
+      value={{ items, cartItems, favorities, getAddedItems, handleCardLike }}
     >
       <div className="wrapper">
         <Header onClickCart={() => setCartOpened(true)} />
@@ -114,7 +117,7 @@ export function App() {
           />
         </Route>
         <Route exact path="/favorities">
-          <Favorities handleCardLike={handleCardLike} />
+          <Favorities />
         </Route>
       </div>
     </AppContext.Provider>
