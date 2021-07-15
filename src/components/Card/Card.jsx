@@ -46,12 +46,16 @@ export function Card({
         </ContentLoader>
       ) : (
         <>
-          <button className={styles.like} onClick={handleLikeClick}>
-            <img
-              src={isLiked ? '/img/like-enabled.svg' : '/img/like-disabled.svg'}
-              alt="Like"
-            />
-          </button>
+          {onClickLike && (
+            <button className={styles.like} onClick={handleLikeClick}>
+              <img
+                src={
+                  isLiked ? '/img/like-enabled.svg' : '/img/like-disabled.svg'
+                }
+                alt="Like"
+              />
+            </button>
+          )}
 
           <img width={133} height={112} src={image} alt="sneakers" />
           <h5>{title}</h5>
@@ -60,17 +64,21 @@ export function Card({
               <span>Цена:</span>
               <b>{price} руб.</b>
             </div>
-            <button
-              onClick={handlePlusClick}
-              className={getAddedItems(id) ? styles.plus : ''}
-            >
-              <img
-                src={
-                  getAddedItems(id) ? '/img/plus-checked.svg' : '/img/plus.svg'
-                }
-                alt="Add item"
-              />
-            </button>
+            {onClickAdd && (
+              <button
+                onClick={handlePlusClick}
+                className={getAddedItems(id) ? styles.plus : ''}
+              >
+                <img
+                  src={
+                    getAddedItems(id)
+                      ? '/img/plus-checked.svg'
+                      : '/img/plus.svg'
+                  }
+                  alt="Add item"
+                />
+              </button>
+            )}
           </div>
         </>
       )}

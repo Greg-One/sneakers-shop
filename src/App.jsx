@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Favorities } from './pages/Favorities';
 import { AppContext } from './context';
+import { Orders } from './pages/Orders';
 
 export function App() {
   const [items, setItems] = React.useState([]);
@@ -100,6 +101,7 @@ export function App() {
         handleCardLike,
         setCartOpened,
         setCartItems,
+        handleCartAdd,
       }}
     >
       <div className="wrapper">
@@ -124,8 +126,13 @@ export function App() {
             isLoading={isLoading}
           />
         </Route>
+
         <Route exact path="/favorities">
           <Favorities />
+        </Route>
+
+        <Route exact path="/orders">
+          <Orders />
         </Route>
       </div>
     </AppContext.Provider>

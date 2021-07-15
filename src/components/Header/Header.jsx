@@ -25,16 +25,16 @@ export function Header(props) {
           </button>
         </li>
         <li>
-          <Link to="favorities">
+          <Link to="/favorities">
             <button>
-              <img src="/img/favorities.svg" alt="Favorities" />
+              <img src="/img/favorities.svg" alt="Favorities list" />
             </button>
           </Link>
         </li>
         <li>
-          <Link to="profile">
+          <Link to="/orders">
             <button>
-              <img src="/img/user-icon.svg" alt="Profile" />
+              <img src="/img/user-icon.svg" alt="Orders list" />
             </button>
           </Link>
         </li>
