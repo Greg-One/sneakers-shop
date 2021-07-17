@@ -21,15 +21,13 @@ export function App() {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const cartResponse = await axios.get(
-          'https://60e0cfc96b689e001788cbeb.mockapi.io/cart',
-        );
-        const favoritiesResponse = await axios.get(
-          'https://60e0cfc96b689e001788cbeb.mockapi.io/favorities',
-        );
-        const itemsResponse = await axios.get(
-          'https://60e0cfc96b689e001788cbeb.mockapi.io/items',
-        );
+
+        const [cartResponse, favoritiesResponse, itemsResponse] =
+          await Promise.all([
+            axios.get('https://60e0cfc96b689e001788cbeb.mockapi.io/cart'),
+            axios.get('https://60e0cfc96b689e001788cbeb.mockapi.io/favorities'),
+            axios.get('https://60e0cfc96b689e001788cbeb.mockapi.io/items'),
+          ]);
 
         setIsLoading(false);
 
