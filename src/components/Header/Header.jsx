@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
+
 import styles from './Header.module.scss';
 
 export function Header(props) {

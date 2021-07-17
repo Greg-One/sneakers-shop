@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+
 import { Header } from './components/Header';
 import { Drawer } from './components/Drawer';
 import { Route } from 'react-router-dom';
@@ -106,14 +107,12 @@ export function App() {
     >
       <div className="wrapper">
         <Header onClickCart={() => setCartOpened(true)} />
-        {cartOpened && (
-          <Drawer
-            items={cartItems}
-            onClose={() => setCartOpened(false)}
-            onCartRemove={handleCartRemove}
-          />
-        )}
-
+        <Drawer
+          items={cartItems}
+          onClose={() => setCartOpened(false)}
+          onCartRemove={handleCartRemove}
+          opened={cartOpened}
+        />
         <Route exact path="/">
           <Home
             items={items}
