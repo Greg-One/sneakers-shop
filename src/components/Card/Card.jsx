@@ -5,7 +5,6 @@ import styles from './Card.module.scss';
 
 export function Card({
   id,
-  parentId,
   title,
   image,
   price,
@@ -72,7 +71,7 @@ export function Card({
               >
                 <img
                   src={
-                    getAddedItems(parentId)
+                    getAddedItems(id)
                       ? '/img/plus-checked.svg'
                       : '/img/plus.svg'
                   }

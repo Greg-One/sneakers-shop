@@ -44,18 +44,30 @@ export function App() {
 
   const handleCartAdd = async (obj) => {
     try {
-      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+      const findItem = cartItems.find(
+        (item) => Number(item.parentId) === Number(obj.id),
+      );
+
+      if (findItem) {
         setCartItems((prev) =>
-          prev.filter((item) => Number(item.id) !== Number(obj.id)),
+          prev.filter((item) => Number(item.parentId) !== Number(obj.id)),
         );
         await axios.delete(
-          `https://60e0cfc96b689e001788cbeb.mockapi.io/cart/${obj.id}`,
+          `https://60e0cfc96b689e001788cbeb.mockapi.io/cart/${findItem.id}`,
         );
       } else {
         setCartItems((prev) => [...prev, obj]);
-        await axios.post(
+        const { data } = await axios.post(
           'https://60e0cfc96b689e001788cbeb.mockapi.io/cart',
           obj,
+        );
+        setCartItems((prev) =>
+          prev.map((item) => {
+            if (item.parentId === data.parentId) {
+              return { ...item, id: data.id };
+            }
+            return item;
+          }),
         );
       }
     } catch (error) {
@@ -65,7 +77,9 @@ export function App() {
 
   const handleCartRemove = async (id) => {
     try {
-      setCartItems((prev) => prev.filter((item) => item.id !== id));
+      setCartItems((prev) =>
+        prev.filter((item) => Number(item.id) !== Number(id)),
+      );
       await axios.delete(
         `https://60e0cfc96b689e001788cbeb.mockapi.io/cart/${id}`,
       );
