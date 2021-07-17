@@ -100,7 +100,7 @@ export function App() {
   };
 
   const getAddedItems = (id) => {
-    return cartItems.some((obj) => Number(obj.id) === Number(id));
+    return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
   return (

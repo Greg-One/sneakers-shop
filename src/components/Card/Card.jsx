@@ -5,6 +5,7 @@ import styles from './Card.module.scss';
 
 export function Card({
   id,
+  parentId,
   title,
   image,
   price,
@@ -15,15 +16,15 @@ export function Card({
   loading = false,
 }) {
   const { getAddedItems } = React.useContext(AppContext);
-
   const [isLiked, setIsLiked] = React.useState(liked);
+  const objData = { id, parentId: id, title, image, price };
 
   const handlePlusClick = () => {
-    onClickAdd({ id, title, image, price });
+    onClickAdd(objData);
   };
 
   const handleLikeClick = () => {
-    onClickLike({ id, title, image, price });
+    onClickLike(objData);
     setIsLiked(!isLiked);
   };
 
@@ -71,7 +72,7 @@ export function Card({
               >
                 <img
                   src={
-                    getAddedItems(id)
+                    getAddedItems(parentId)
                       ? '/img/plus-checked.svg'
                       : '/img/plus.svg'
                   }
