@@ -1,4 +1,4 @@
-## Online store application using React library.
+## Online store application developed using React library.
 
 
 
